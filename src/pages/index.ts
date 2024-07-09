@@ -1,1 +1,2 @@
-export { Home } from './home'
+// Pages
+export { Home } from './app/home'
