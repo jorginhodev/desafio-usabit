@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
 interface ContainerProps {
-  borderRadius?: string
+  radius?: string
 }
 
 export const Container = styled.input<ContainerProps>`
   width: 100%;
   background: ${({ theme }) => theme.colors.white};
   border: none;
-  border-radius: ${({ borderRadius }) => borderRadius || '4px'};
+  border-radius: ${({ radius }) => radius};
   height: 50px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   outline: 0;

@@ -8,12 +8,12 @@ export interface InputProps
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, radius, ...props }, ref) => {
+  ({ className, type, radius = '4px', ...props }, ref) => {
     return (
       <S.Container
         type={type}
         className={className}
-        borderRadius={radius}
+        radius={radius}
         ref={ref}
         {...props}
       />
