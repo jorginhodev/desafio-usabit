@@ -2,9 +2,9 @@ import { setupWorker } from 'msw/browser'
 
 import { env } from '@/env'
 
-import { getClientsMock } from './get-clients-mock'
+import { getCustomersMock } from './get-customers-mock'
 
-export const worker = setupWorker(getClientsMock)
+export const worker = setupWorker(getCustomersMock)
 
 export async function enableMocks() {
   if (env.MODE === 'production') {

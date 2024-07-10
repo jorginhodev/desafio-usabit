@@ -1,1 +1,1 @@
-export type { Client } from './user'
+export type { Customer } from './customer'

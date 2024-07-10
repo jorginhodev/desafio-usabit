@@ -5,7 +5,7 @@ import { render, screen } from '@/utils/custom-render'
 import { Card } from './card'
 
 describe('<CardButton />', () => {
-  const mockClient = {
+  const mockCustomer = {
     id: '1',
     firstName: 'John',
     lastName: 'Doe',
@@ -17,20 +17,20 @@ describe('<CardButton />', () => {
   beforeEach(() => {
     render(
       <Router>
-        <Card {...mockClient} />
+        <Card {...mockCustomer} />
       </Router>,
     )
   })
 
-  it('should display the client name', () => {
+  it('should display the customer name', () => {
     expect(screen.getByText('John Doe')).toBeInTheDocument()
   })
 
-  it('should display the client email', () => {
+  it('should display the customer email', () => {
     expect(screen.getByText('john.doe@example.com')).toBeInTheDocument()
   })
 
-  it('should display the client city and state', () => {
+  it('should display the customer city and state', () => {
     expect(screen.getByText('New York - NY')).toBeInTheDocument()
   })
 

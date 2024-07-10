@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Link, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
-import { getClients } from '@/api/get-clients'
+import { getCustomers } from '@/api/get-customers'
 import { Button, Card, Pagination } from '@/components'
 
 import * as S from './styles'
@@ -16,9 +16,9 @@ export function Home() {
     .transform((page) => page - 1)
     .parse(searchParams.get('page') ?? '1')
 
-  const { data: result } = useQuery({
-    queryKey: ['clients', { name, pageIndex }],
-    queryFn: () => getClients({ pageIndex, name }),
+  const { data: customersList } = useQuery({
+    queryKey: ['customers', { name, pageIndex }],
+    queryFn: () => getCustomers({ pageIndex, name }),
   })
 
   function handlePaginate(pageIndex: number) {
@@ -32,7 +32,7 @@ export function Home() {
   return (
     <S.Container>
       <S.Header>
-        <strong>{result?.pagination.totalCount} clientes</strong>
+        <strong>{customersList?.pagination.totalCount} clientes</strong>
 
         <Link to="/new">
           <Button variant="transparent">Novo cliente</Button>
@@ -42,15 +42,17 @@ export function Home() {
       <S.Separator />
 
       <S.CardList>
-        {result?.data.map((client) => <Card key={client.id} {...client} />)}
+        {customersList?.data.map((customer) => (
+          <Card key={customer.id} {...customer} />
+        ))}
       </S.CardList>
 
       <S.PaginationContainer>
-        {result && (
+        {customersList && (
           <Pagination
-            pageIndex={result.pagination.pageIndex}
-            perPage={result.pagination.perPage}
-            totalCount={result.pagination.totalCount}
+            pageIndex={customersList.pagination.pageIndex}
+            perPage={customersList.pagination.perPage}
+            totalCount={customersList.pagination.totalCount}
             onPageChange={handlePaginate}
           />
         )}

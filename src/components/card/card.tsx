@@ -2,11 +2,11 @@ import { Pencil, Trash } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components'
-import { Client } from '@/types'
+import { Customer } from '@/types'
 
 import * as S from './styles'
 
-type CardProps = Client
+type CardProps = Customer
 
 export function Card({ id, name, email, city, state }: CardProps) {
   return (

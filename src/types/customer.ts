@@ -1,4 +1,4 @@
-export type Client = {
+export type Customer = {
   id: string
   name: string
   email: string
