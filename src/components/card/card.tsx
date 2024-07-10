@@ -8,18 +8,11 @@ import * as S from './styles'
 
 type CardProps = Client
 
-export function Card({
-  id,
-  firstName,
-  lastName,
-  email,
-  city,
-  state,
-}: CardProps) {
+export function Card({ id, name, email, city, state }: CardProps) {
   return (
     <S.Container>
       <S.Info>
-        <strong>{`${firstName} ${lastName}`}</strong>
+        <strong>{name}</strong>
 
         <span>{email}</span>
         <span>{`${city} - ${state}`}</span>
