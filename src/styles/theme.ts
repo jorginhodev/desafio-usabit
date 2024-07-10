@@ -16,5 +16,6 @@ export const theme = {
       main: '#FC5050',
       dark: '#F63131',
     },
+    white: '#FFFFFF',
   },
 }
