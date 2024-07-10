@@ -1,0 +1,13 @@
+import { setupWorker } from 'msw/browser'
+
+import { env } from '@/env'
+
+export const worker = setupWorker()
+
+export async function enableMocks() {
+  if (env.MODE === 'production') {
+    return
+  }
+
+  await worker.start()
+}
