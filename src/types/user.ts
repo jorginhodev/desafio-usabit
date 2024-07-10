@@ -1,7 +1,6 @@
 export type Client = {
   id: string
-  firstName: string
-  lastName: string
+  name: string
   email: string
   city: string
   state: string
