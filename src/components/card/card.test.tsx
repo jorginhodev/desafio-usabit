@@ -7,8 +7,7 @@ import { Card } from './card'
 describe('<CardButton />', () => {
   const mockCustomer = {
     id: '1',
-    firstName: 'John',
-    lastName: 'Doe',
+    name: 'John Doe',
     email: 'john.doe@example.com',
     city: 'New York',
     state: 'NY',
