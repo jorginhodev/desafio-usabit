@@ -4,7 +4,7 @@ import { Client } from '@/types'
 
 import { GetClientsResponse } from '../get-clients'
 
-const clients: Client[] = Array.from({ length: 5 }).map((_, i) => {
+const clients: Client[] = Array.from({ length: 15 }).map((_, i) => {
   return {
     id: String(i),
     name: `Client ${i}`,
@@ -32,13 +32,13 @@ export const getClientsMock = http.get<never, never, GetClientsResponse>(
       )
     }
 
-    const paginatedOrders = filteredClients.slice(
+    const paginatedClients = filteredClients.slice(
       pageIndex * 10,
       (pageIndex + 1) * 10,
     )
 
     return HttpResponse.json({
-      data: paginatedOrders,
+      data: paginatedClients,
       pagination: {
         pageIndex,
         perPage: 10,
