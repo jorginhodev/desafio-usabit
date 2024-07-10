@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 type ContainerProps = {
-  variant: 'primary' | 'danger' | 'transparent' | 'gray' | 'icon'
+  $variant: 'primary' | 'danger' | 'transparent' | 'gray' | 'icon'
 }
 
 const variants = {
@@ -63,5 +63,5 @@ export const Container = styled.button<ContainerProps>`
   border-radius: 4px;
   transition: all 0.2s ease-in;
 
-  ${({ variant }) => variants[variant]}
+  ${({ $variant }) => variants[$variant]}
 `

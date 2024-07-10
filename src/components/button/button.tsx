@@ -11,7 +11,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   return (
-    <S.Container variant={variant} {...props}>
+    <S.Container $variant={variant} {...props}>
       {children}
     </S.Container>
   )
