@@ -28,3 +28,7 @@ export const CardList = styled.div`
   flex-direction: column;
   gap: 16px;
 `
+
+export const PaginationContainer = styled.div`
+  margin: 16px 0 32px;
+`

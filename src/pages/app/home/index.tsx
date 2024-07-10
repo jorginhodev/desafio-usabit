@@ -18,7 +18,7 @@ export function Home() {
 
   const { data: result } = useQuery({
     queryKey: ['clients', { name, pageIndex }],
-    queryFn: () => getClients({ pageIndex: 1, name }),
+    queryFn: () => getClients({ pageIndex, name }),
   })
 
   function handlePaginate(pageIndex: number) {
@@ -45,14 +45,16 @@ export function Home() {
         {result?.data.map((client) => <Card key={client.id} {...client} />)}
       </S.CardList>
 
-      {result && (
-        <Pagination
-          pageIndex={result.pagination.pageIndex}
-          perPage={result.pagination.perPage}
-          totalCount={result.pagination.totalCount}
-          onPageChange={handlePaginate}
-        />
-      )}
+      <S.PaginationContainer>
+        {result && (
+          <Pagination
+            pageIndex={result.pagination.pageIndex}
+            perPage={result.pagination.perPage}
+            totalCount={result.pagination.totalCount}
+            onPageChange={handlePaginate}
+          />
+        )}
+      </S.PaginationContainer>
     </S.Container>
   )
 }
