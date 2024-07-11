@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  margin-top: 32px;
+  margin: 32px 0 32px;
 `
 
 export const Header = styled.header`
@@ -31,4 +31,13 @@ export const CardList = styled.div`
 
 export const PaginationContainer = styled.div`
   margin: 16px 0 32px;
+`
+
+export const NoCustomers = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  color: ${({ theme }) => theme.colors.gray[200]};
 `

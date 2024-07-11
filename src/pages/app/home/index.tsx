@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { SearchX } from 'lucide-react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
@@ -47,16 +48,38 @@ export function Home() {
         ))}
       </S.CardList>
 
-      <S.PaginationContainer>
-        {customersList && (
+      {!customersList && (
+        <S.NoCustomers>
+          <p>Erro ao carregar dados</p>
+        </S.NoCustomers>
+      )}
+
+      {customersList && customersList.pagination.totalCount > 0 && (
+        <S.PaginationContainer>
           <Pagination
             pageIndex={customersList.pagination.pageIndex}
             perPage={customersList.pagination.perPage}
             totalCount={customersList.pagination.totalCount}
             onPageChange={handlePaginate}
           />
-        )}
-      </S.PaginationContainer>
+        </S.PaginationContainer>
+      )}
+
+      {name && customersList?.pagination.totalCount === 0 && (
+        <S.NoCustomers>
+          <SearchX color="#FC5050" size={18} />
+          <p>
+            Nenhum resultado foi encontrado para o termo{' '}
+            <strong>&quot;{name}&quot;</strong>.
+          </p>
+        </S.NoCustomers>
+      )}
+
+      {!name && customersList?.pagination.totalCount === 0 && (
+        <S.NoCustomers>
+          <p>Nenhum cliente encontrado.</p>
+        </S.NoCustomers>
+      )}
     </S.Container>
   )
 }
