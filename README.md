@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# Desafio Usabit - CRUD de Clientes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+### Descrição do desafio:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O objetivo é construir um simples CRUD de clientes utilizando a stack de tecnologias especificadas, seguindo as melhores práticas de desenvolvimento e testes.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Tecnologias utilizadas:
+	•	Vite
+	•	React
+	•	Typescript
+	•	React Hooks
+	•	React Router
+	•	React Query
+	•	Styled Components
+	•	Vitest
+	•	React Testing Library
+	•	React Hook Form
+	•	MSW (Mock Service Worker)
+	•	Zod
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Funcionalidades
+- [x] Criação de novos clientes
+- [x] Leitura de clientes existentes
+- [x] Atualização de dados de clientes
+- [x] Exclusão de clientes
+- [x] Pesquisa de clientes por nome (bônus)
+- [x] Paginação de clientes (bônus)
+
+
+### Instalação
+Para rodar o projeto localmente, siga os seguintes passos:
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/jorginhodev/desafio-usabit
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Navegue até o diretório do projeto:
+```bash
+cd desafio-usabit
+```
+
+3. Instale as dependências utilizando o PNPM:
+```bash
+pnpm install
+```
+
+4. Rode o projeto:
+```bash
+pnpm dev
+```
+
+5. Abra o navegador e acesse o endereço:
+```bash
+http://localhost:5173/
+```
+
+
+### Testes
+
+Os testes foram implementados utilizando Vitest e React Testing Library. Para rodar os testes, use o comando:
+```bash
+pnpm test
+```
