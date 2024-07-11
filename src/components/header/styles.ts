@@ -6,8 +6,3 @@ export const Container = styled.header`
   flex-direction: column;
   align-items: center;
 `
-
-export const InputSearchContainer = styled.div`
-  margin-top: 48px;
-  width: 100%;
-`
