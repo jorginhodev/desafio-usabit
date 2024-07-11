@@ -1,12 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useQuery } from '@tanstack/react-query'
-import { SearchX } from 'lucide-react'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { SearchX, TriangleAlert } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 
+import { deleteCustomer } from '@/api/delete-customer'
 import { getCustomers } from '@/api/get-customers'
-import { Button, Card, Input, Pagination } from '@/components'
+import { Button, Card, Input, Modal, Pagination } from '@/components'
+import { queryClient } from '@/lib/react-query'
+import { Customer } from '@/types'
 
 import * as S from './styles'
 
@@ -22,6 +27,11 @@ export function Home() {
       name: searchParams.get('name') ?? '',
     },
   })
+  const { onChange, ...rest } = register('name')
+
+  const [showDeleteModalCustomer, setShowDeleteModalCustomer] = useState(false)
+  const [customerBeingDeleted, setCustomerBeingDeleted] =
+    useState<Customer | null>(null)
 
   const name = searchParams.get('name')
   const pageIndex = z.coerce
@@ -32,6 +42,13 @@ export function Home() {
   const { data: customersList } = useQuery({
     queryKey: ['customers', { name, pageIndex }],
     queryFn: () => getCustomers({ pageIndex, name }),
+  })
+
+  const { mutate: deleteCustomerFn } = useMutation({
+    mutationFn: deleteCustomer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['customers'] })
+    },
   })
 
   function handlePaginate(pageIndex: number) {
@@ -52,7 +69,23 @@ export function Home() {
     })
   }
 
-  const { onChange, ...rest } = register('name')
+  function handleDeleteCustomer() {
+    try {
+      if (!customerBeingDeleted) {
+        toast.error('Cliente não encontrado.')
+        return
+      }
+
+      deleteCustomerFn({ id: customerBeingDeleted?.id })
+      setShowDeleteModalCustomer(false)
+
+      setCustomerBeingDeleted(null)
+
+      toast.success('Cliente deletado com sucesso!')
+    } catch (error) {
+      toast.error('Erro ao deletar cliente.')
+    }
+  }
 
   return (
     <S.Container>
@@ -82,7 +115,12 @@ export function Home() {
 
       <S.CardList>
         {customersList?.data.map((customer) => (
-          <Card key={customer.id} {...customer} />
+          <Card
+            key={customer.id}
+            {...customer}
+            handleShowDeleteModal={setShowDeleteModalCustomer}
+            handleCustomerBeingDeleted={setCustomerBeingDeleted}
+          />
         ))}
       </S.CardList>
 
@@ -118,6 +156,20 @@ export function Home() {
           <p>Nenhum cliente encontrado.</p>
         </S.NoCustomers>
       )}
+
+      <Modal
+        danger
+        visible={showDeleteModalCustomer}
+        title={`Tem certeza que deseja remover o contato ${customerBeingDeleted?.name}?`}
+        confirmLabel="Deletar"
+        onCancel={() => setShowDeleteModalCustomer(false)}
+        onConfirm={handleDeleteCustomer}
+      >
+        <S.ModalBody>
+          <TriangleAlert size={16} />
+          Esta ação não poderá ser desfeita!
+        </S.ModalBody>
+      </Modal>
     </S.Container>
   )
 }

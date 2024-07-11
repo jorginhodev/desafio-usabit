@@ -48,3 +48,8 @@ export const NoCustomers = styled.div`
   height: 100%;
   color: ${({ theme }) => theme.colors.gray[200]};
 `
+
+export const ModalBody = styled.div`
+  display: flex;
+  gap: 8px;
+`
