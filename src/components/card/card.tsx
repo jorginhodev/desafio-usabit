@@ -1,4 +1,5 @@
 import { Pencil, Trash } from 'lucide-react'
+import { Dispatch, SetStateAction } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Button } from '@/components'
@@ -6,9 +7,20 @@ import { Customer } from '@/types'
 
 import * as S from './styles'
 
-type CardProps = Customer
+type CardProps = Customer & {
+  handleShowDeleteModal: Dispatch<SetStateAction<boolean>>
+  handleCustomerBeingDeleted: Dispatch<SetStateAction<Customer | null>>
+}
 
-export function Card({ id, name, email, city, state }: CardProps) {
+export function Card({
+  id,
+  name,
+  email,
+  city,
+  state,
+  handleShowDeleteModal,
+  handleCustomerBeingDeleted,
+}: CardProps) {
   return (
     <S.Container>
       <S.Info>
@@ -25,7 +37,19 @@ export function Card({ id, name, email, city, state }: CardProps) {
           </Button>
         </Link>
 
-        <Button variant="icon">
+        <Button
+          variant="icon"
+          onClick={() => {
+            handleShowDeleteModal(true)
+            handleCustomerBeingDeleted({
+              id,
+              name,
+              email,
+              city,
+              state,
+            })
+          }}
+        >
           <Trash color="#FC5050" size={16} />
         </Button>
       </S.Actions>
