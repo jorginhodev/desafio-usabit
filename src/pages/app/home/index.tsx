@@ -1,15 +1,27 @@
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
 import { SearchX } from 'lucide-react'
+import { useForm } from 'react-hook-form'
 import { Link, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { getCustomers } from '@/api/get-customers'
-import { Button, Card, Pagination } from '@/components'
+import { Button, Card, Input, Pagination } from '@/components'
 
 import * as S from './styles'
 
+const schema = z.object({
+  name: z.string().optional(),
+})
+
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const { register } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: searchParams.get('name') ?? '',
+    },
+  })
 
   const name = searchParams.get('name')
   const pageIndex = z.coerce
@@ -30,14 +42,40 @@ export function Home() {
     })
   }
 
+  function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const name = event.target.value
+
+    setSearchParams((state) => {
+      state.set('name', name)
+      state.set('page', '1')
+      return state
+    })
+  }
+
+  const { onChange, ...rest } = register('name')
+
   return (
     <S.Container>
       <S.Header>
-        <strong>{customersList?.pagination.totalCount} clientes</strong>
+        <S.InputSearchContainer>
+          <Input
+            placeholder="Pesquise pelo nome"
+            radius="25px"
+            onChange={(event) => {
+              onChange(event)
+              handleSearchChange(event)
+            }}
+            {...rest}
+          />
+        </S.InputSearchContainer>
 
-        <Link to="/new">
-          <Button variant="transparent">Novo cliente</Button>
-        </Link>
+        <S.CustomersInfo>
+          <strong>{customersList?.pagination.totalCount} clientes</strong>
+
+          <Link to="/new">
+            <Button variant="transparent">Novo cliente</Button>
+          </Link>
+        </S.CustomersInfo>
       </S.Header>
 
       <S.Separator />

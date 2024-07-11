@@ -7,12 +7,19 @@ export const Container = styled.div`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 24px;
+  flex-direction: column;
+`
 
-  strong {
-    color: ${({ theme }) => theme.colors.gray[900]};
-    font-size: 24px;
-  }
+export const InputSearchContainer = styled.div`
+  width: 100%;
+`
+
+export const CustomersInfo = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
 
 export const Separator = styled.div`
