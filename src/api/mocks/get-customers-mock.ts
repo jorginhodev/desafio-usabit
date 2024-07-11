@@ -1,18 +1,7 @@
 import { http, HttpResponse } from 'msw'
 
-import { Customer } from '@/types'
-
 import { GetCustomersResponse } from '../get-customers'
-
-const customers: Customer[] = Array.from({ length: 15 }).map((_, i) => {
-  return {
-    id: String(i),
-    name: `Customer ${i}`,
-    email: `customer-${i}@mail.com`,
-    city: 'New York',
-    state: 'NY',
-  }
-})
+import { customers } from './customers'
 
 export const getCustomersMock = http.get<never, never, GetCustomersResponse>(
   '/customers',
