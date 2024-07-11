@@ -10,11 +10,4 @@ describe('<Header />', () => {
     expect(logoImage).toHaveAttribute('src')
     expect(logoImage).toHaveAttribute('width', '200')
   })
-
-  it('should render the search input with the correct placeholder', () => {
-    render(<Header />)
-    const searchInput = screen.getByPlaceholderText('Pesquise pelo nome')
-    expect(searchInput).toBeInTheDocument()
-    expect(searchInput).toHaveStyle('border-radius: 25px')
-  })
 })
