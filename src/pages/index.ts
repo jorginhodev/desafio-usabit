@@ -4,3 +4,4 @@ export { DefaultLayout } from './_layouts/default'
 // Pages
 export { Home } from './app/home'
 export { New } from './app/new'
+export { Edit } from './app/edit'
