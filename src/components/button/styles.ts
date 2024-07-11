@@ -64,4 +64,9 @@ export const Container = styled.button<ContainerProps>`
   transition: all 0.2s ease-in;
 
   ${({ $variant }) => variants[$variant]}
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `
